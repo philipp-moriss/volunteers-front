@@ -1,33 +1,28 @@
-import { useQuery } from "@tanstack/react-query";
-import { UserWithRoleData } from "../types";
-import { authApi } from "@/entities/auth/api";
-import { getToken, removeToken, removeRefreshToken } from "@/shared/lib/auth";
-import { useState, useEffect } from "react";
+import { useQuery } from '@tanstack/react-query';
+import { authApi } from '../../api';
+import { UserWithRoleData } from '@/entities/user/model/types';
+import { getToken, removeToken, removeRefreshToken } from '@/shared/lib/auth';
+import { useState, useEffect } from 'react';
 
-export const useGetMe = () => {
+export function useGetMe() {
   const [hasToken, setHasToken] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const checkToken = () => {
+    const checkToken = async () => {
       const token = getToken();
       setHasToken(!!token);
     };
     checkToken();
   }, []);
 
-  const query = useQuery<UserWithRoleData | null>({
-    queryKey: ["user", "me"],
+  return useQuery<UserWithRoleData | null>({
+    queryKey: ['user', 'me'],
     queryFn: async (): Promise<UserWithRoleData | null> => {
       try {
         // Бэкенд возвращает UserWithRoleData напрямую, а не объект с полем user
         const response = await authApi.getMe();
-        if (!response) {
-          return null;
-        }
-        
-        return response;
+        return response || null;
       } catch (error) {
-        // Если произошла ошибка, возвращаем null вместо undefined
         console.error('Error fetching user data:', error);
         return null;
       }
@@ -49,23 +44,4 @@ export const useGetMe = () => {
       return failureCount < 2;
     },
   });
-
-  // Если токена нет, считаем что загрузка завершена и пользователь не авторизован
-  if (hasToken === false) {
-    return {
-      ...query,
-      isLoading: false,
-      data: null,
-    };
-  }
-
-  // Если еще проверяем наличие токена, показываем загрузку
-  if (hasToken === null) {
-    return {
-      ...query,
-      isLoading: true,
-    };
-  }
-
-  return query;
-};
+}

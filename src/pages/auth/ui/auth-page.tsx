@@ -1,39 +1,99 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useQueryClient } from '@tanstack/react-query';
 import { Input, Button } from '@/shared/ui';
-import { User, UserRole } from '@/entities/user/model/types';
+import { useSendSms, useVerifySms } from '@/entities/auth/model/hooks';
+import { useGetMe } from '@/entities/user/model/hooks';
+import { UserRole } from '@/entities/user/model/types';
+
+const roleRoutes: Record<UserRole, string> = {
+  volunteer: '/volunteer',
+  needy: '/needy',
+  admin: '/admin',
+};
 
 export const AuthPage: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const [phone, setPhone] = useState('');
   const [code, setCode] = useState('');
   const [showCodeInput, setShowCodeInput] = useState(false);
+  
+  const sendSmsMutation = useSendSms();
+  const verifySmsMutation = useVerifySms();
+  const { data: user, isLoading } = useGetMe();
+  console.log(user,"response");
 
-  const handleSendCode = () => {
+  // Определяем, находимся ли мы в режиме разработки (для отображения кода в консоли)
+  const isDev = import.meta.env.DEV;
+
+  // Редирект на главный экран, если пользователь уже авторизован
+  useEffect(() => {
+    if (!isLoading && user) {
+      const redirectPath = roleRoutes[user.role] || '/auth';
+      navigate(redirectPath, { replace: true });
+    }
+  }, [user, isLoading, navigate]);
+
+  const handleSendCode = async () => {
     if (phone) {
-      setShowCodeInput(true);
+      try {
+        await sendSmsMutation.mutateAsync({
+          phoneNumber: phone,
+          isDev: isDev,
+        });
+        setShowCodeInput(true);
+      } catch (error) {
+        // Ошибка уже обработана в хуке через toast
+        console.error('Failed to send SMS:', error);
+      }
     }
   };
 
-  const handleVerify = () => {
-    if (code) {
-      // Сохраняем токен (в будущем получим от API)
-      localStorage.setItem('token', 'mock-token-' + Date.now());
-      localStorage.setItem('authPhone', phone);
-      
-      // Инвалидируем кэш, чтобы useGetMe заново запросил данные
-      queryClient.invalidateQueries({ queryKey: ['user', 'me'] });
-
-      // Редирект на онбординг для нового пользователя
-      // В будущем: проверка через API, существует ли пользователь
-      // Если новый → онбординг, если существующий → на главную по роли
-      navigate('/volunteer/onboarding');
+  const handleVerify = async () => {
+    if (code && code.length === 6) {
+      try {
+        await verifySmsMutation.mutateAsync({
+          phoneNumber: phone,
+          code: code,
+        });
+        // Редирект обрабатывается в хуке useVerifySms
+      } catch (error) {
+        // Ошибка уже обработана в хуке через toast
+        console.error('Failed to verify SMS:', error);
+      }
     }
   };
+
+  // Показываем код в консоли в режиме разработки
+  useEffect(() => {
+    if (isDev && sendSmsMutation.data?.code) {
+      console.log('🔧 DEV MODE: SMS код:', sendSmsMutation.data.code);
+    }
+  }, [sendSmsMutation.data, isDev]);
+
+  // Показываем загрузку, пока проверяем авторизацию
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-lg text-gray-600">{t('common.loading')}</div>
+        </div>
+      </div>
+    );
+  }
+
+  // Если пользователь авторизован, компонент будет редиректнут через useEffect
+  // Но на всякий случай показываем загрузку, пока происходит редирект
+  if (user) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-lg text-gray-600">{t('common.loading')}</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
@@ -62,9 +122,9 @@ export const AuthPage: FC = () => {
                   fullWidth
                   size="lg"
                   onClick={handleSendCode}
-                  disabled={!phone}
+                  disabled={!phone || sendSmsMutation.isPending}
                 >
-                  {t('auth.sendCode')}
+                  {sendSmsMutation.isPending ? t('common.loading') : t('auth.sendCode')}
                 </Button>
               </>
             ) : (
@@ -86,9 +146,9 @@ export const AuthPage: FC = () => {
                   fullWidth
                   size="lg"
                   onClick={handleVerify}
-                  disabled={!code}
+                  disabled={!code || code.length !== 6 || verifySmsMutation.isPending}
                 >
-                  {t('auth.verify')}
+                  {verifySmsMutation.isPending ? t('common.loading') : t('auth.verify')}
                 </Button>
                 <Button
                   fullWidth

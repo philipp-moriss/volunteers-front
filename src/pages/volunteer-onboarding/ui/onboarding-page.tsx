@@ -371,11 +371,11 @@ export const OnboardingPage: FC = () => {
                                         <option value="4">Beer Sheva</option>
                                     </select>
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                {/* <div> */}
+                                    {/* <label className="block text-sm font-medium text-gray-700 mb-2">
                                         {t('onboarding.phone')}
-                                    </label>
-                                    <div className="flex items-center gap-2">
+                                    </label> */}
+                                    {/* <div className="flex items-center gap-2">
                                         <div className="flex items-center gap-1 px-3 py-3 border border-gray-300 rounded-l-2xl bg-gray-50">
                                             <span className="text-lg">🇮🇱</span>
                                             <span className="text-sm text-gray-600">+972</span>
@@ -389,8 +389,8 @@ export const OnboardingPage: FC = () => {
                                             }
                                             className="flex-1 rounded-l-none"
                                         />
-                                    </div>
-                                </div>
+                                    </div> */}
+                                {/* </div> */}
                                 <div className="flex items-start gap-3 pt-2">
                                     <input
                                         type="checkbox"
