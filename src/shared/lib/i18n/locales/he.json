@@ -85,7 +85,8 @@
     "active": "פעיל",
     "inProgress": "בטיפול",
     "completed": "הושלם",
-    "cancelled": "בוטל"
+    "cancelled": "בוטל",
+    "allPrograms": "כל התוכניות"
   },
   "volunteer": {
     "title": "מתנדב",

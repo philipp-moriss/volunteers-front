@@ -43,7 +43,8 @@
     "active": "Active",
     "inProgress": "In Progress",
     "completed": "Completed",
-    "cancelled": "Cancelled"
+    "cancelled": "Cancelled",
+    "allPrograms": "All Programs"
   },
   "volunteer": {
     "title": "Volunteer",
