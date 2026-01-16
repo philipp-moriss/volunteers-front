@@ -13,7 +13,7 @@ export const TaskCard: FC<TaskCardProps> = ({ task }) => {
 
         <span
           className={`
-            text-[11px] font-medium px-2 py-0.5 rounded-full w-fit mb-1
+            font-sans text-[14px] font-normal text-[#393939] px-2 py-0.5 rounded-full w-fit mb-1
             ${task.status === 'active' && 'bg-yellow-100 text-yellow-700'}
             ${task.status === 'in_progress' && 'bg-blue-100 text-blue-700'}
             ${task.status === 'completed' && 'bg-green-100 text-green-700'}
@@ -27,11 +27,11 @@ export const TaskCard: FC<TaskCardProps> = ({ task }) => {
           {task.title}
         </h3>
 
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="font-sans font-normal text-[14px] text-[#4f4f4f]">
           {task.points}
         </p>
 
-        <p className="text-xs text-blue-600 font-medium mt-1">
+        <p className="font-sans font-normal text-[#004573] text-[14px]">
           {new Date(task.createdAt).toLocaleDateString()}
         </p>
       </div>
