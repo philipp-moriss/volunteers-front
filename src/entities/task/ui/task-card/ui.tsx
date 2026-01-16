@@ -14,10 +14,10 @@ export const TaskCard: FC<TaskCardProps> = ({ task }) => {
         <span
           className={`
             font-sans text-[14px] font-normal text-[#393939] px-2 py-0.5 rounded-full w-fit mb-1
-            ${task.status === 'active' && 'pastel.peach'}
-            ${task.status === 'in_progress' && 'bg-blue-100 '}
-            ${task.status === 'completed' && 'bg-green-100'}
-            ${task.status === 'cancelled' && 'bg-red-100 '}
+            ${task.status === 'active' && 'bg-pastel-peach'}
+            ${task.status === 'in_progress' && 'bg-pastel-blue '}
+            ${task.status === 'completed' && 'bg-pastel-green'}
+            ${task.status === 'cancelled' && 'bg-pastel-pink '}
           `}
         >
           {task.status}
