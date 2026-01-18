@@ -24,18 +24,26 @@ export const TasksPage: FC = () => {
             variant="ghost"
             aria-label={t('common.profile')}
             icon={
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 17 17"
-                fill="none"
-                className="w-5 h-5"
-              >
-                <path
-                  d="M11.825 0H4.84167C1.80833 0 0 1.80833 0 4.84167V11.825C0 14.1667 1.075 15.775 2.96667 16.3833C3.51667 16.575 4.15 16.6667 4.84167 16.6667H11.825C12.5167 16.6667 13.15 16.575 13.7 16.3833C15.5917 15.775 16.6667 14.1667 16.6667 11.825V4.84167C16.6667 1.80833 14.8583 0 11.825 0ZM15.4167 11.825C15.4167 13.6083 14.7167 14.7333 13.3083 15.2C12.5 13.6083 10.5833 12.475 8.33333 12.475C6.08333 12.475 4.175 13.6 3.35833 15.2H3.35C1.95833 14.75 1.25 13.6167 1.25 11.8333V4.84167C1.25 2.49167 2.49167 1.25 4.84167 1.25H11.825C14.175 1.25 15.4167 2.49167 15.4167 4.84167V11.825Z"
-                  fill="currentColor"
-                />
+              <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g filter="url(#filter0_d_410_41161)">
+                  <rect width="32" height="32" rx="12" fill="white" shape-rendering="crispEdges"/>
+                  <rect x="0.5" y="0.5" width="31" height="31" rx="11.5" stroke="#014573" shape-rendering="crispEdges"/>
+                  <path d="M19.4917 7.66666H12.5084C9.47508 7.66666 7.66675 9.47499 7.66675 12.5083V19.4917C7.66675 21.8333 8.74175 23.4417 10.6334 24.05C11.1834 24.2417 11.8167 24.3333 12.5084 24.3333H19.4917C20.1834 24.3333 20.8167 24.2417 21.3667 24.05C23.2584 23.4417 24.3334 21.8333 24.3334 19.4917V12.5083C24.3334 9.47499 22.5251 7.66666 19.4917 7.66666ZM23.0834 19.4917C23.0834 21.275 22.3834 22.4 20.9751 22.8667C20.1667 21.275 18.2501 20.1417 16.0001 20.1417C13.7501 20.1417 11.8417 21.2667 11.0251 22.8667H11.0167C9.62508 22.4167 8.91675 21.2833 8.91675 19.5V12.5083C8.91675 10.1583 10.1584 8.91666 12.5084 8.91666H19.4917C21.8417 8.91666 23.0834 10.1583 23.0834 12.5083V19.4917Z" fill="#014573"/>
+                  <path d="M16.0002 12.6667C14.3502 12.6667 13.0168 14 13.0168 15.65C13.0168 17.3 14.3502 18.6417 16.0002 18.6417C17.6502 18.6417 18.9835 17.3 18.9835 15.65C18.9835 14 17.6502 12.6667 16.0002 12.6667Z" fill="#014573"/>
+                </g>
+                <defs>
+                  <filter id="filter0_d_410_41161" x="0" y="0" width="34" height="34" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dx="2" dy="2"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.00392157 0 0 0 0 0.270588 0 0 0 0 0.45098 0 0 0 1 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_410_41161"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_410_41161" result="shape"/>
+                  </filter>
+                </defs>
               </svg>
+
             }
             className="text-deepBlue"
             onClick={() => console.log('Клик!')}
