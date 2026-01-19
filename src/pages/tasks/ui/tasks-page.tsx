@@ -1,38 +1,31 @@
-import { FC, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { TaskList } from '@/widgets/task-list';
-import { Header } from '@/shared/ui';
-import { useGetPrograms } from '@/entities/program/hook/useGetPrograms';
+import {FC, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {TaskList} from '@/widgets/task-list';
+import {Header, IconButton} from '@/shared/ui';
+import {useGetTasks} from "@/entities/task/hook";
+import {Tabs} from "@/shared/ui/tabs";
+import {IconUser} from "@/shared/assets/images/iconUser/iconUser.tsx";
 
 export const TasksPage: FC = () => {
-  const { t } = useTranslation();
-  const [selectedProgramId, setSelectedProgramId] = useState<string>('');
+  const {t} = useTranslation();
+  const tabs = ['All tasks', 'My tasks'];
+  const [activeTab, setActiveTab] = useState(tabs[0]);
 
-  const { data: programs = [], isLoading: isLoadingPrograms } = useGetPrograms();
+
+  const {data: tasks = [], isLoading: isLoading} = useGetTasks();
+
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header
         title={t('tasks.title')}
         rightActions={[
-          <select
-            key="program-select"
-            value={selectedProgramId}
-            onChange={(e) => setSelectedProgramId(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white text-sm min-w-[180px] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={isLoadingPrograms}
-          >
-            <option value="">{t('tasks.allPrograms') || 'All Programs'}</option>
-            {programs.map((program) => (
-              <option key={program.id} value={program.id}>
-                {program.name}
-              </option>
-            ))}
-          </select>,
+          <IconUser/>
         ]}
       />
+      <Tabs tabs={tabs} onChange={setActiveTab}/>
       <div className="px-4 py-6">
-        <TaskList tasks={[]} />
+        <TaskList tasks={tasks}/>
       </div>
     </div>
   );

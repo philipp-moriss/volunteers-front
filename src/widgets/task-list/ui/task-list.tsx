@@ -8,7 +8,7 @@ interface TaskListProps {
 
 export const TaskList: FC<TaskListProps> = ({ tasks }) => {
   return (
-    <div>
+    <div className="flex flex-col gap-3">
       {tasks.map((task) => (
         <TaskCard key={task.id} task={task} />
       ))}
