@@ -6,6 +6,9 @@ export const TaskPreviewPage = () => {
 
   const onClickHandler = () => {console.log('click!')}
 
+  // console.log(task.id)
+
+
   return (
     <section className="bg-backGround flex flex-col min-h-screen pt-24 pb-12 px-5 text-center">
       <div className={'flex flex-col gap-8'}>
@@ -17,7 +20,7 @@ export const TaskPreviewPage = () => {
             title={t('New details have been received for the task you wanted!')}
             className="border-none bg-transparent py-0"
           />
-          <Card>
+          <Card className="bg-transparent border-none shadow-none">
             <p>Come view the task details now
               so you can schedule a time to complete it</p>
           </Card>
@@ -27,7 +30,7 @@ export const TaskPreviewPage = () => {
         <Button size={'lg'} fullWidth={true} variant={'secondary'} onClick={onClickHandler}>
           View task details
         </Button>
-        <Button size={'lg'} fullWidth={true} variant={'outline'} onClick={onClickHandler}>
+        <Button size={'lg'} fullWidth={true} variant={'outline'} onClick={onClickHandler} className="bg-white hover:bg-gray-50">
           Later
         </Button>
       </div>

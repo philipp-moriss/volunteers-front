@@ -1,12 +1,12 @@
-import { FC } from 'react';
-import { Task } from '../../model/types';
+import {FC} from 'react';
+import {Task} from '../../model/types';
 import {useNavigate} from "react-router-dom";
 
 interface TaskCardProps {
   task: Task;
 }
 
-export const TaskCard: FC<TaskCardProps> = ({ task }) => {
+export const TaskCard: FC<TaskCardProps> = ({task}) => {
 
   const navigate = useNavigate()
   const handleClick = () => {
@@ -14,8 +14,9 @@ export const TaskCard: FC<TaskCardProps> = ({ task }) => {
   }
 
   return (
-    <div className='flex items-center justify-between border border-[#e0e7ff] rounded-2xl p-4 shadow-[2px_2px_0_0_#e0e7ff] bg-white'
-         onClick={handleClick}
+    <div
+      className='flex items-center justify-between border border-[#e0e7ff] rounded-2xl p-4 shadow-[2px_2px_0_0_#e0e7ff] bg-white'
+      onClick={handleClick}
     >
 
       <div className="flex flex-col justify-between">
@@ -45,7 +46,8 @@ export const TaskCard: FC<TaskCardProps> = ({ task }) => {
         </p>
       </div>
 
-      <div className="w-[88px] h-[88px] rounded-xl bg-blue-50 flex items-center justify-center overflow-hidden shrink-0">
+      <div
+        className="w-[88px] h-[88px] rounded-xl bg-blue-50 flex items-center justify-center overflow-hidden shrink-0">
         <img
           src="/task-placeholder.png"
           alt=""
