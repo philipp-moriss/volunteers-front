@@ -1,13 +1,14 @@
 import {Button, Card, Header} from "@/shared/ui";
 import {t} from "i18next";
 import mission_illustration from '@/shared/assets/images/mission_illustration.webp'
+import {useParams} from "react-router-dom";
 
 export const TaskPreviewPage = () => {
 
   const onClickHandler = () => {console.log('click!')}
 
-  // console.log(task.id)
-
+  const { taskId } = useParams();
+  console.log(taskId);
 
   return (
     <section className="bg-backGround flex flex-col min-h-screen pt-24 pb-12 px-5 text-center">
@@ -21,7 +22,7 @@ export const TaskPreviewPage = () => {
             className="border-none bg-transparent py-0"
           />
           <Card className="bg-transparent border-none shadow-none">
-            <p>Come view the task details now
+            <p>Come view the task details now <br/>
               so you can schedule a time to complete it</p>
           </Card>
         </div>
