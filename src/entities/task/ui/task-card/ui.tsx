@@ -1,13 +1,22 @@
 import { FC } from 'react';
 import { Task } from '../../model/types';
+import {useNavigate} from "react-router-dom";
 
 interface TaskCardProps {
   task: Task;
 }
 
 export const TaskCard: FC<TaskCardProps> = ({ task }) => {
+
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate(`/volunteer/tasks/${task.id}/preview`)
+  }
+
   return (
-    <div className='flex items-center justify-between border border-[#e0e7ff] rounded-2xl p-4 shadow-[2px_2px_0_0_#e0e7ff] bg-white'>
+    <div className='flex items-center justify-between border border-[#e0e7ff] rounded-2xl p-4 shadow-[2px_2px_0_0_#e0e7ff] bg-white'
+         onClick={handleClick}
+    >
 
       <div className="flex flex-col justify-between">
 

@@ -61,7 +61,11 @@ export const Router: FC = () => {
           }
         />
 
-        <Route path="/dev/task-preview" element={<TaskPreviewPage />} />
+        <Route path="/volunteer/tasks/:taskId/preview" element={
+          <PrivateRoute allowedRoles={['volunteer']}>
+            <TaskPreviewPage />
+          </PrivateRoute>
+        } />
 
         {/* Роуты для нуждающихся */}
         <Route
