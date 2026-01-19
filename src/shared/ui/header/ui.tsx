@@ -25,7 +25,7 @@ export const Header: FC<HeaderProps> = ({
   return (
     <header
       className={cn(
-        'w-full bg-white border-b border-gray-200 px-4 py-3',
+        'w-full bg-white border-b border-gray-200 px-4 pt-[9vh] pb-[5vh]',
         'flex items-center justify-between',
         className
       )}
@@ -47,7 +47,7 @@ export const Header: FC<HeaderProps> = ({
         )}
                 {leftAction}
                 {title && (
-                    <h1 className="text-lg font-semibold text-primary truncate">{title}</h1>
+                    <h1 className="text-3xl font-sans font-normal text-primary truncate">{title}</h1>
                 )}
             </div>
             {rightActions && rightActions.length > 0 && (
