@@ -12,6 +12,25 @@ interface AppProviderProps {
   children?: ReactNode;
 }
 
+// Безопасное использование localStorage
+const safeLocalStorage = {
+  getItem: (key: string): string | null => {
+    try {
+      return localStorage.getItem(key);
+    } catch (error) {
+      console.warn('localStorage.getItem failed:', error);
+      return null;
+    }
+  },
+  setItem: (key: string, value: string): void => {
+    try {
+      localStorage.setItem(key, value);
+    } catch (error) {
+      console.warn('localStorage.setItem failed:', error);
+    }
+  },
+};
+
 export const App: FC<AppProviderProps> = ({ children }) => {
   const { isInstallable, isInstalled } = usePWAInstall();
   const { subscribe, isSubscribed, isSupported, permission, requestPermission } = usePushSubscription();
@@ -24,7 +43,7 @@ export const App: FC<AppProviderProps> = ({ children }) => {
       return;
     }
 
-    const token = localStorage.getItem('token');
+    const token = safeLocalStorage.getItem('token');
     if (!token) {
       return;
     }
@@ -64,7 +83,7 @@ export const App: FC<AppProviderProps> = ({ children }) => {
 
   useEffect(() => {
     if (!isInstalled) {
-      const hasSeenModal = localStorage.getItem('pwa-install-modal-seen');
+      const hasSeenModal = safeLocalStorage.getItem('pwa-install-modal-seen');
       if (!hasSeenModal) {
         const timer = setTimeout(() => {
           setShowInstallModal(true);
@@ -76,7 +95,7 @@ export const App: FC<AppProviderProps> = ({ children }) => {
 
   const handleCloseModal = () => {
     setShowInstallModal(false);
-    localStorage.setItem('pwa-install-modal-seen', 'true');
+    safeLocalStorage.setItem('pwa-install-modal-seen', 'true');
   };
 
   return (

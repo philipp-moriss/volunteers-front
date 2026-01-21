@@ -26,12 +26,17 @@ export function usePushSubscription() {
   // Проверка поддержки браузером
   useEffect(() => {
     const isSupported =
+      typeof window !== 'undefined' &&
       'serviceWorker' in navigator &&
       'PushManager' in window &&
       'Notification' in window &&
+      typeof Notification !== 'undefined' &&
       isVapidConfigured();
 
-    const permission = Notification.permission;
+    const permission: NotificationPermission = 
+      isSupported && typeof Notification !== 'undefined' 
+        ? Notification.permission 
+        : 'denied';
 
     setState((prev) => ({
       ...prev,
@@ -74,7 +79,7 @@ export function usePushSubscription() {
 
   // Запрос разрешения
   const requestPermission = useCallback(async (): Promise<boolean> => {
-    if (!state.isSupported) {
+    if (!state.isSupported || typeof window === 'undefined' || typeof Notification === 'undefined') {
       setState((prev) => ({
         ...prev,
         error: 'Push notifications are not supported',

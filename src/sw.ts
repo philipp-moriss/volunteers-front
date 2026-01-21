@@ -97,8 +97,16 @@ self.addEventListener('push', (event: PushEvent) => {
   } catch (error) {
     console.error('[SW] Failed to parse push notification data:', {
       error: error instanceof Error ? error.message : String(error),
-      data: event.data.text ? await event.data.text() : 'Unable to read data',
+      hasData: !!event.data,
     });
+    // Попытка прочитать данные асинхронно для отладки
+    if (event.data && event.data.text) {
+      event.data.text().then((text) => {
+        console.error('[SW] Push event data as text:', text);
+      }).catch(() => {
+        console.error('[SW] Unable to read push event data as text');
+      });
+    }
     return;
   }
 

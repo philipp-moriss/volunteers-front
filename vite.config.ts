@@ -21,7 +21,7 @@ export default defineConfig({
         name: "Волонтерское приложение",
         short_name: "Волонтеры",
         description: "Платформа для координации волонтерской помощи",
-        theme_color: "#16a34a",
+        theme_color: "#ffffff",
         background_color: "#ffffff",
         display: "standalone",
         orientation: "portrait",
@@ -64,7 +64,8 @@ export default defineConfig({
       },
       devOptions: {
         enabled: true,
-        type: "module",
+        type: "classic",
+        navigateFallback: "index.html",
       },
     }),
   ],
@@ -75,7 +76,8 @@ export default defineConfig({
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".png", ".jpg", ".jpeg", ".svg", ".gif", ".webp"],
   },
   server: {
-    port: 3000,
+    port: 5173, // Можно переопределить через --port
+    host: true, // Можно переопределить через --host <IP>
     open: true,
   },
   build: {
