@@ -186,5 +186,16 @@
   },
   "settings": {
     "title": "הגדרות"
+  },
+  "categoriesNeedy": {
+    "headerTitle": "איך נוכל לעזור?",
+    "aiPrompt": "שתף מה קרה, והבינה המלאכותית תיצור את המשימה עבורך כדי שתוכל לערוך ולאשר לפני השמירה.",
+    "searchPlaceholder": "למשל, עזרה בקניות במכולת...",
+    "recentTasksTitle": "המשימות האחרונות שלי",
+    "categoriesTitle": "חיפוש לפי קטגוריות",
+    "mostRequestedTitle": "המבוקשים ביותר בקהילה",
+    "nextButton": "הבא",
+    "tabMyTasks": "המשימות שלי",
+    "tabRequestHelp": "בקשת עזרה"
   }
 }

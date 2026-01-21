@@ -1,9 +1,12 @@
 import {Button} from "@/shared/ui";
 import {useState} from "react";
 import {CategorySelector} from "@/features/select-categories/ui";
+import {useTranslation} from "react-i18next";
 
 export const CategoriesPage = () => {
     const [activeTab, setActiveTab] = useState<'tasks' | 'help'>('help');
+    const { t } = useTranslation();
+
     const TASKS = [
         { id: 1, title: 'Transportation' },
         { id: 2, title: 'Private Lessons' },
@@ -23,7 +26,7 @@ export const CategoriesPage = () => {
             {/*Хедер*/}
             <div className="fixed top-0 left-0 right-0 z-[50] max-w-[393px] mx-auto bg-gradient-to-b from-blue-50 to-white pt-16 pb-2 px-[20px]">
                 <h1 className="text-[28px] text-[#004573] font-medium">
-                    How can we help?
+                    {t("categoriesNeedy.headerTitle")}
                 </h1>
             </div>
             <div className="pt-[120px] pb-[150px]">
@@ -39,18 +42,22 @@ export const CategoriesPage = () => {
                 </div>
                 <input
                     type="text"
-                    placeholder="e.g., help with grocery shopping..."
+                    placeholder={t("categoriesNeedy.searchPlaceholder")}
                     className="
       w-full h-[48px] pl-12 pr-4 rounded-2xl ring-1 ring-gray-200 text-gray-600
       placeholder:text-[#C4C4C4] placeholder:font-normal placeholder:text-[18px]
       focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-200 shadow-sm text-base
     "/>
             </div>
-    <span className={"max-w-[353px] text-[#5B5B5B] text-[16px] font-normal mt-4 leading-[22px]"}>Share what happened, and AI will create the task for you to edit and approve before saving.</span>
+    <span className={"max-w-[353px] text-[#5B5B5B] text-[16px] font-normal mt-4 leading-[22px]"}>
+        {t("categoriesNeedy.aiPrompt")}
+    </span>
 </div>
 
             {/*Таски*/}
-            <h2 className={"text-[20px] font-normal mt-6 px-[20px]"}>My Recent Tasks</h2>
+            <h2 className={"text-[20px] font-normal mt-6 px-[20px]"}>
+                {t("categoriesNeedy.recentTasksTitle")}
+            </h2>
             <div
                 dir="rtl"
                 className="flex gap-2.5 overflow-x-auto px-[20px] pb-4 mt-3">
@@ -73,11 +80,15 @@ export const CategoriesPage = () => {
             </div>
 
             {/*Категории*/}
-            <h2 className={"text-[20px] font-normal mt-6 px-[20px]"}>Search by Categories</h2>
+            <h2 className={"text-[20px] font-normal mt-6 px-[20px]"}>
+                {t("categoriesNeedy.categoriesTitle")}
+            </h2>
                 <CategorySelector />
 
             {/*Выбор комьюнити*/}
-            <h2 className={"text-[20px] font-normal mt-6 px-[20px]"}>Most requested in the community</h2>
+            <h2 className={"text-[20px] font-normal mt-6 px-[20px]"}>
+                {t("categoriesNeedy.mostRequestedTitle")}
+            </h2>
             <div
                 dir="rtl"
                 className="flex gap-2.5 overflow-x-auto px-[20px] pb-4 mt-3">
@@ -111,7 +122,9 @@ export const CategoriesPage = () => {
                 {/*Футер*/}
                 <div className="fixed z-[1000] bottom-0 left-0 w-full bg-white border-t border-blue-50">
                 <div className="px-5 pb-4 pt-2">
-                    <Button className={"py-4 border border-[#162A43] shadow-[1px_1px_0_0_#162A43,3px_3px_0_0_#162A43]"} variant="primary" fullWidth>Next</Button>
+                    <Button className={"py-4 border border-[#162A43] shadow-[1px_1px_0_0_#162A43,3px_3px_0_0_#162A43]"} variant="primary" fullWidth>
+                        {t("categoriesNeedy.nextButton")}
+                    </Button>
                 </div>
                 <div className="flex items-center justify-between px-16 pb-4 pt-2 border-t-[1px] border-indigo-400/50">
                     <button className="flex flex-col items-center gap-1 group" onClick={() => setActiveTab('tasks')}>
@@ -128,7 +141,7 @@ export const CategoriesPage = () => {
                                 ? 'text-[#004573]'
                                 : 'text-[#5B5B5B] group-hover:text-gray-600'
                         }`}>
-            My Tasks
+               {t("categoriesNeedy.tabMyTasks")}
           </span>
                     </button>
                     <button className="flex flex-col items-center gap-1" onClick={() => setActiveTab('help')}>
@@ -144,7 +157,7 @@ export const CategoriesPage = () => {
                                 ? 'text-[#004573]'
                                 : 'text-[#5B5B5B]'
                         }`}>
-            Request Help
+            {t("categoriesNeedy.tabRequestHelp")}
           </span>
                     </button>
                 </div>
