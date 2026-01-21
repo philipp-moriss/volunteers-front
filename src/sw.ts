@@ -8,6 +8,18 @@ import { NetworkFirst, CacheFirst, StaleWhileRevalidate } from 'workbox-strategi
 
 declare const self: ServiceWorkerGlobalScope;
 
+// Логирование при активации Service Worker
+self.addEventListener('activate', (event) => {
+  console.log('🔔 [SW] Service Worker activated');
+  event.waitUntil(self.clients.claim());
+});
+
+// Логирование при установке Service Worker
+self.addEventListener('install', (event) => {
+  console.log('🔔 [SW] Service Worker installing');
+  self.skipWaiting();
+});
+
 // Логирование при активации service worker
 self.addEventListener('activate', (event) => {
   console.log('[SW] ✅ Service Worker activated');
@@ -167,6 +179,16 @@ self.addEventListener('push', (event: PushEvent) => {
 
         await self.registration.showNotification(notificationData.title, options);
         console.log('[SW] ✅ Notification shown successfully:', notificationData.title);
+        
+        // Отправляем сообщение в основной поток для логирования
+        const clients = await self.clients.matchAll();
+        clients.forEach((client) => {
+          client.postMessage({
+            type: 'NOTIFICATION_RECEIVED',
+            data: notificationData,
+            timestamp: new Date().toISOString(),
+          });
+        });
       } catch (error) {
         console.error('[SW] ❌ Failed to process push notification:', {
           error: error instanceof Error ? error.message : String(error),

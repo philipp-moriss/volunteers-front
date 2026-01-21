@@ -14,7 +14,9 @@
     "submit": "שלח",
     "search": "חפש",
     "filter": "סנן",
-    "close": "סגור"
+    "close": "סגור",
+    "settings": "הגדרות",
+    "profile": "פרופיל"
   },
   "onboarding": {
     "selectProgram": "צריך גלגל?",
@@ -160,16 +162,29 @@
     }
   },
   "notifications": {
+    "title": "התראות Push",
+    "description": "קבל התראות על משימות חדשות, תגובות ועדכונים",
+    "pushNotifications": "התראות Push",
     "enable": "הפעל התראות",
     "disable": "כבה התראות",
+    "toggle": "החלף התראות push",
     "permissionRequest": "אפשר התראות כדי להישאר מעודכן על משימות חדשות ותגובות",
     "permissionDenied": "התראות חסומות. אנא הפעל אותן בהגדרות הדפדפן שלך.",
+    "permissionDeniedHelp": "כדי להפעיל התראות, עבור להגדרות הדפדפן שלך ואפשר התראות לאתר זה.",
     "notSupported": "התראות push אינן נתמכות בדפדפן שלך",
+    "statusEnabled": "מופעל - תקבל התראות push",
+    "statusDisabled": "כבוי - לא תקבל התראות push",
+    "enabled": "התראות הופעלו בהצלחה",
+    "disabled": "התראות כובו בהצלחה",
+    "error": "נכשל בעדכון הגדרות התראות",
     "newTask": "משימה חדשה זמינה",
     "taskResponse": "תגובה חדשה למשימה שלך",
     "responseApproved": "תגובה אושרה",
     "responseRejected": "תגובה נדחתה",
     "assignmentCancelled": "הקצאת משימה בוטלה",
     "taskStatusUpdated": "סטטוס משימה עודכן"
+  },
+  "settings": {
+    "title": "הגדרות"
   }
 }

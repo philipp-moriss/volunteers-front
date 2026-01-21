@@ -1,12 +1,28 @@
 import {IconButton} from "@/shared/ui";
-import {t} from "i18next";
+import {useTranslation} from "react-i18next";
+import {useNavigate} from "react-router-dom";
+import {useGetMe} from "@/entities/user/model/hooks";
 
 export const IconUser = () => {
+  const {t} = useTranslation();
+  const navigate = useNavigate();
+  const {data: user} = useGetMe();
+
+  const handleClick = () => {
+    if (user?.role === 'volunteer') {
+      navigate('/volunteer/settings');
+    } else if (user?.role === 'needy') {
+      navigate('/needy/settings');
+    } else {
+      navigate('/settings');
+    }
+  };
+
   return <IconButton
     className="w-8 h-8 rounded-lg drop-shadow-[2px_2px_0_#004573]"
     key="profile"
     variant="ghost"
-    aria-label={t('common.profile')}
+    aria-label={t('common.settings')}
     icon={
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_d_410_41161)">
@@ -17,6 +33,6 @@ export const IconUser = () => {
         </g>
       </svg>
     }
-    onClick={() => console.log('Клик!')}
+    onClick={handleClick}
   />
 }

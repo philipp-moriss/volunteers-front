@@ -14,7 +14,9 @@
     "submit": "Submit",
     "search": "Search",
     "filter": "Filter",
-    "close": "Close"
+    "close": "Close",
+    "settings": "Settings",
+    "profile": "Profile"
   },
   "auth": {
     "title": "Login",
@@ -143,16 +145,29 @@
     }
   },
   "notifications": {
+    "title": "Push Notifications",
+    "description": "Receive notifications about new tasks, responses, and updates",
+    "pushNotifications": "Push Notifications",
     "enable": "Enable Notifications",
     "disable": "Disable Notifications",
+    "toggle": "Toggle push notifications",
     "permissionRequest": "Allow notifications to stay updated about new tasks and responses",
     "permissionDenied": "Notifications are blocked. Please enable them in your browser settings.",
+    "permissionDeniedHelp": "To enable notifications, go to your browser settings and allow notifications for this site.",
     "notSupported": "Push notifications are not supported in your browser",
+    "statusEnabled": "Enabled - You will receive push notifications",
+    "statusDisabled": "Disabled - You will not receive push notifications",
+    "enabled": "Notifications enabled successfully",
+    "disabled": "Notifications disabled successfully",
+    "error": "Failed to update notification settings",
     "newTask": "New Task Available",
     "taskResponse": "New Response to Your Task",
     "responseApproved": "Response Approved",
     "responseRejected": "Response Rejected",
     "assignmentCancelled": "Task Assignment Cancelled",
     "taskStatusUpdated": "Task Status Updated"
+  },
+  "settings": {
+    "title": "Settings"
   }
 }
