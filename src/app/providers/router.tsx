@@ -8,6 +8,7 @@ import { LeaderboardPage } from '@/pages/leaderboard/ui';
 import { SettingsPage } from '@/pages/settings/ui';
 import { PrivateRoute } from './private-route';
 import { RoleRedirect } from './role-redirect';
+import {CategoriesPage} from "@/pages/needy-categories/ui";
 
 export const Router: FC = () => {
   return (
@@ -74,7 +75,7 @@ export const Router: FC = () => {
           path="/needy"
           element={
             <PrivateRoute allowedRoles={['needy']}>
-              <TasksPage />
+              <CategoriesPage />
             </PrivateRoute>
           }
         />

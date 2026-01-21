@@ -2,18 +2,19 @@ import {Button} from "@/shared/ui";
 import {useState} from "react";
 import {CategorySelector} from "@/features/select-categories/ui";
 import {useTranslation} from "react-i18next";
+import {TaskScroll} from "@/features/task-scroll/ui";
 
 export const CategoriesPage = () => {
     const [activeTab, setActiveTab] = useState<'tasks' | 'help'>('help');
     const { t } = useTranslation();
 
-    const TASKS = [
-        { id: 1, title: 'Transportation' },
-        { id: 2, title: 'Private Lessons' },
-        { id: 3, title: 'Electrician' },
-        { id: 4, title: 'Plumbing' },
-        { id: 5, title: 'Shopping' },
-    ];
+    // const TASKS = [
+    //     { id: 1, title: 'Transportation' },
+    //     { id: 2, title: 'Private Lessons' },
+    //     { id: 3, title: 'Electrician' },
+    //     { id: 4, title: 'Plumbing' },
+    //     { id: 5, title: 'Shopping' },
+    // ];
     const MOSTPOPULAR = [
         { id: 1, title: 'Babysitting', place: 1 },
         { id: 2, title: 'Private lessons', place: 2 },
@@ -58,26 +59,7 @@ export const CategoriesPage = () => {
             <h2 className={"text-[20px] font-normal mt-6 px-[20px]"}>
                 {t("categoriesNeedy.recentTasksTitle")}
             </h2>
-            <div
-                dir="rtl"
-                className="flex gap-2.5 overflow-x-auto px-[20px] pb-4 mt-3">
-                {TASKS.map((task) => (
-                    <button
-                        key={task.id}
-                        className="flex flex-col items-center gap-3"
-                    >
-                        <div className="w-[110px] h-[110px] bg-white rounded-3xl border border-gray-300 flex items-center justify-center overflow-hidden">
-                            <div className="w-full h-full bg-gray-50 flex items-center justify-center text-gray-300">
-                                Img
-                            </div>
-                            {/* <img src={task.image} alt={task.title} className="w-full h-full object-cover" /> */}
-                        </div>
-                        <span className="text-[#5B5B5B] text-[16px] font-normal text-center whitespace-nowrap">
-              {task.title}
-            </span>
-                    </button>
-                ))}
-            </div>
+                <TaskScroll />
 
             {/*Категории*/}
             <h2 className={"text-[20px] font-normal mt-6 px-[20px]"}>
