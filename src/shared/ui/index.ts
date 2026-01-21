@@ -8,3 +8,4 @@ export * from "./header";
 export * from "./divider";
 export * from "./textarea";
 export * from "./language-switcher";
+export * from "./modal";

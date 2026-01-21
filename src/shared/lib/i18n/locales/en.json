@@ -111,5 +111,48 @@
     "aboutPlaceholder": "Tell us about yourself (optional)",
     "clickToChangePhoto": "Tap to change photo",
     "iAmWheelButton": "I am a wheel - happy to help"
+  },
+  "pwa": {
+    "title": "Install App",
+    "description": "Install our app to your device for a better experience and offline access.",
+    "installButton": "Install Now",
+    "showInstructions": "Show Instructions",
+    "instructionsTitle": "How to Install",
+    "gotIt": "Got it",
+    "ios": {
+      "step1": "Tap the Share button at the bottom of the screen",
+      "step2": "Scroll down and tap 'Add to Home Screen'",
+      "step3": "Tap 'Add' in the top right corner",
+      "step4": "The app icon will appear on your home screen",
+      "note": "Note: Make sure you're using Safari browser on iOS"
+    },
+    "android": {
+      "step1": "Tap the menu button (three dots) in the browser",
+      "step2": "Select 'Install app' or 'Add to Home screen'",
+      "step3": "Confirm installation in the popup"
+    },
+    "desktop": {
+      "step1": "Look for the install icon in your browser's address bar",
+      "step2": "Click the install icon or use the browser menu",
+      "step3": "Click 'Install' in the popup dialog"
+    },
+    "generic": {
+      "step1": "Open your browser menu",
+      "step2": "Look for 'Install' or 'Add to Home Screen' option",
+      "step3": "Follow the on-screen instructions"
+    }
+  },
+  "notifications": {
+    "enable": "Enable Notifications",
+    "disable": "Disable Notifications",
+    "permissionRequest": "Allow notifications to stay updated about new tasks and responses",
+    "permissionDenied": "Notifications are blocked. Please enable them in your browser settings.",
+    "notSupported": "Push notifications are not supported in your browser",
+    "newTask": "New Task Available",
+    "taskResponse": "New Response to Your Task",
+    "responseApproved": "Response Approved",
+    "responseRejected": "Response Rejected",
+    "assignmentCancelled": "Task Assignment Cancelled",
+    "taskStatusUpdated": "Task Status Updated"
   }
 }

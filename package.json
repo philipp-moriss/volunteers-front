@@ -12,14 +12,14 @@
   "dependencies": {
     "@tanstack/react-query": "^5.59.0",
     "clsx": "^2.1.1",
+    "i18next": "^23.11.0",
+    "i18next-browser-languagedetector": "^8.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-i18next": "^14.1.0",
     "react-router-dom": "^6.26.0",
     "sonner": "^1.7.0",
-    "tailwind-merge": "^2.5.2",
-    "i18next": "^23.11.0",
-    "react-i18next": "^14.1.0",
-    "i18next-browser-languagedetector": "^8.0.0"
+    "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
@@ -37,6 +37,11 @@
     "vite": "^5.4.2",
     "vite-plugin-pwa": "^0.20.5",
     "workbox-build": "^7.1.0",
+    "workbox-core": "^7.4.0",
+    "workbox-expiration": "^7.4.0",
+    "workbox-precaching": "^7.4.0",
+    "workbox-routing": "^7.4.0",
+    "workbox-strategies": "^7.4.0",
     "workbox-window": "^7.1.0"
   }
 }
