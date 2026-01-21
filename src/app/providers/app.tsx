@@ -25,7 +25,7 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
   });
 
   // Также слушаем события от Service Worker для отладки
-  navigator.serviceWorker.ready.then((registration) => {
+  navigator.serviceWorker.ready.then(() => {
     console.log('🔔 [App] Service Worker ready, checking notifications support');
     console.log('🔔 [App] Notification permission:', Notification.permission);
     

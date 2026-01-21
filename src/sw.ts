@@ -176,22 +176,21 @@ self.addEventListener('push', (event: PushEvent) => {
         };
 
         // Проверяем активные клиенты
-        const clients = await self.clients.matchAll({ includeUncontrolled: true, type: 'window' });
-        const hasActiveClient = clients.some((client) => client.focused);
+        const activeClients = await self.clients.matchAll({ includeUncontrolled: true, type: 'window' });
+        const hasActiveClient = activeClients.some((client) => client.focused);
         
         console.log('[SW] 📤 Attempting to show notification:', {
           title: notificationData.title,
           body: notificationData.body,
           permission: Notification.permission,
           hasActiveClient,
-          clientsCount: clients.length,
+          clientsCount: activeClients.length,
         });
 
         try {
-          const notification = await self.registration.showNotification(notificationData.title, options);
+          await self.registration.showNotification(notificationData.title, options);
           console.log('[SW] ✅ Notification shown successfully:', {
             title: notificationData.title,
-            notification: notification ? 'created' : 'null',
           });
           
           // Дополнительная проверка через небольшую задержку
@@ -209,8 +208,8 @@ self.addEventListener('push', (event: PushEvent) => {
         }
         
         // Отправляем сообщение в основной поток для логирования
-        const clients = await self.clients.matchAll();
-        clients.forEach((client) => {
+        const allClients = await self.clients.matchAll();
+        allClients.forEach((client) => {
           client.postMessage({
             type: 'NOTIFICATION_RECEIVED',
             data: notificationData,
