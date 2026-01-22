@@ -1,11 +1,17 @@
 import {useParams} from "react-router-dom";
 import mission_illustration from "@/shared/assets/images/mission_illustration.webp";
-import {Button, Card, Header} from "@/shared/ui";
+import {Button, Card} from "@/shared/ui";
+import {useGetTaskById} from "@/entities/task/hook/useGetTaskId.ts";
+import smsIcon from '@/shared/assets/images/sms.webp';
+import phoneIcon from '@/shared/assets/images/phone.webp';
+import watsappIcon from '@/shared/assets/images/watsapp.webp';
 import {t} from "i18next";
+
 
 export const TaskDetailsPage = () => {
 
-  const { taskId } = useParams()
+  const {taskId} = useParams()
+  const {data: task, isLoading, isError} = useGetTaskById(taskId)
 
   return (
     <section className="flex flex-col min-h-screen pt-24 pb-24 px-5 text-center">
@@ -16,20 +22,53 @@ export const TaskDetailsPage = () => {
         <div className={'flex flex-col gap-3'}>
           <h1 className="border-none bg-transparent py-0 text-2xl text-primary-900">
             Shopping at the supermarket
-            </h1>
-          <p className="text-textGray font-normal">אלומים</p>
-          <Card variant={'elevated'} className={'p-4 flex flex-col gap-3 items-start'}>
+          </h1>
+          <p className="text-textGray font-normal">{taskId}</p>
+          <Card variant={'elevated'} className={'p-4 flex flex-col gap-3 items-start text-left w-full'}>
             <p className="text-textGray font-normal">To carry out the task, please contact</p>
             <p className="text-textGray font-medium">Sara Cohen</p>
-            <p className={'text-deepBlue font-normal'}> 📞 050-1234567</p>
-            <p className={'text-deepBlue font-normal'}>💬Send a message</p>
-            <p className={'text-deepBlue font-normal'}> Send a WhatsApp message</p>
-            <p className="text-textGray font-medium">At the end of the task, please let us know that it has been completed, so we can feel at ease🙏</p>
+            <a><p className={'text-deepBlue font-normal'}>
+              <span>
+                <img
+                  src={phoneIcon}
+                  className="w-6 h-6 object-contain shrink-0"
+                  alt="icon"
+                />
+              </span>
+              <span> +12345</span>
+            </p>
+            </a>
+            <a><p className={'text-deepBlue font-normal'}>
+              <span>
+                <img
+                  src={smsIcon}
+                  className="w-6 h-6 object-contain shrink-0"
+                  alt="icon"
+                />
+              </span>
+              Send a message
+            </p>
+            </a>
+            <a>
+              <p className={'text-deepBlue font-normal'}>
+              <span>
+                <img
+                  src={watsappIcon}
+                  className="w-6 h-6 object-contain shrink-0"
+                  alt="icon"
+                />
+              </span>
+              Send a WhatsApp message
+            </p>
+            </a>
+            <p className="text-textGray font-medium line-clamp-3 text-left">At the end of the task, please let us know
+              that it has been completed, so we can feel at ease🙏</p>
           </Card>
         </div>
       </div>
       <div className={' flex flex-col gap-3 mt-auto'}>
-        <Button size={'lg'} fullWidth={true} variant={'secondary'} onClick={() => {}}>
+        <Button size={'lg'} fullWidth={true} variant={'secondary'} onClick={() => {
+        }}>
           The task is complete!
         </Button>
       </div>

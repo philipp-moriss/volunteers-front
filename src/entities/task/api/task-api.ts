@@ -33,6 +33,11 @@ export const taskApi = {
 
   getTask: (id: string) => apiClient.request<Task>(`/tasks/${id}`),
 
+  // getTaskById: async (id: string): Promise<Task> => {
+  //   const response = apiClient.request<Task>(`/tasks/${id}`);
+  //   return response.data;
+  // },
+
   getMyTasks: () => apiClient.request<Task[]>('/tasks/my'),
 
   getAssignedTasks: () => apiClient.request<Task[]>('/tasks/assigned'),
