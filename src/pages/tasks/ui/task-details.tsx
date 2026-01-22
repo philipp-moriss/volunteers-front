@@ -33,14 +33,15 @@ export const TaskDetailsPage = () => {
   return (
     <>
       {showAnimation && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+        <div className="fixed inset-0 z-100 flex items-end justify-center">
           <Lottie
             animationData={successAnimation}
             loop={false}
+            className="w-full h-1/2"
             onComplete={() => {
-              navigate("/volunteer/tasks")
+              navigate(`/volunteer/tasks/:${taskId}/completed`)
             }}
-            className="w-72 h-72"
+            // className="w-72 h-72"
           />
         </div>
       )}
