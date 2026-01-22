@@ -13,6 +13,18 @@ export const TaskDetailsPage = () => {
   const {taskId} = useParams()
   const {data: task, isLoading, isError} = useGetTaskById(taskId)
 
+  if (!taskId) {
+    return <div>Invalid task link</div>
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (isError || !task) {
+    return <div>Task not found</div>
+  }
+
   return (
     <section className="flex flex-col min-h-screen pt-24 pb-24 px-5 text-center">
       <div className={'flex flex-col gap-8'}>
@@ -21,7 +33,7 @@ export const TaskDetailsPage = () => {
         />
         <div className={'flex flex-col gap-3'}>
           <h1 className="border-none bg-transparent py-0 text-2xl text-primary-900">
-            {task.title}
+            {task?.title}
           </h1>
           <p className="text-textGray font-normal">{taskId}</p>
           <Card variant={'elevated'} className={'p-4 flex flex-col gap-3 items-start text-left w-full'}>
