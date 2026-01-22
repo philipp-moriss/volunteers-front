@@ -102,8 +102,7 @@ export const TaskDetailsPage = () => {
           </div>
         </div>
         <div className={' flex flex-col gap-3 mt-auto'}>
-          <Button size={'lg'} fullWidth={true} variant={'secondary'} onClick={() => {
-          }}>
+          <Button size={'lg'} fullWidth={true} variant={'secondary'} onClick={() => setShowAnimation(true)}>
             The task is complete!
           </Button>
         </div>
