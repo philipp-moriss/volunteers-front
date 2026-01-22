@@ -21,7 +21,7 @@ export const TaskDetailsPage = () => {
         />
         <div className={'flex flex-col gap-3'}>
           <h1 className="border-none bg-transparent py-0 text-2xl text-primary-900">
-            Shopping at the supermarket
+            {task.title}
           </h1>
           <p className="text-textGray font-normal">{taskId}</p>
           <Card variant={'elevated'} className={'p-4 flex flex-col gap-3 items-start text-left w-full'}>
@@ -65,7 +65,7 @@ export const TaskDetailsPage = () => {
               Send a WhatsApp message
             </p>
             </a>
-            <p className="text-textGray font-medium text-left">
+            <p className="text-textGray font-medium text-left w-80">
               At the end of the task, please let us know
               that it has been completed, so we can feel at ease🙏</p>
           </Card>
