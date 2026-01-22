@@ -10,6 +10,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Lottie from "lottie-react"
 import successAnimation from "@/shared/assets/animations/confetti.json"
+import {useCompleteTask} from "@/entities/task/hook/useCompleteTask.ts";
 
 
 export const TaskDetailsPage = () => {
@@ -17,6 +18,7 @@ export const TaskDetailsPage = () => {
   const navigate = useNavigate();
   const {taskId} = useParams()
   const {data: task, isLoading, isError} = useGetTaskById(taskId)
+  // const { mutate: completeTask, isPending } = useCompleteTask();
 
   if (!taskId) {
     return <div>Invalid task link</div>
@@ -102,7 +104,21 @@ export const TaskDetailsPage = () => {
           </div>
         </div>
         <div className={' flex flex-col gap-3 mt-auto'}>
-          <Button size={'lg'} fullWidth={true} variant={'secondary'} onClick={() => setShowAnimation(true)}>
+          <Button
+            size={'lg'}
+            fullWidth
+            variant={'secondary'}
+            // disabled={isPending}
+          //   onClick={() => {
+          //   completeTask(taskId, {
+          //     onSuccess: () => {
+          //       setShowAnimation(true);
+          //     }
+          //   });
+          // }}
+            onClick={() => {
+              setShowAnimation(true);
+            }}>
             The task is complete!
           </Button>
         </div>
