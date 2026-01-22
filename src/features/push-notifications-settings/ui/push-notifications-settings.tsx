@@ -2,7 +2,11 @@ import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Divider } from '@/shared/ui';
 import { usePushSubscription } from '@/shared/lib/hooks/use-push-subscription';
-import { subscribeToPushNotifications, unsubscribeFromPushNotifications } from '@/entities/notification/api';
+import {
+  subscribeToPushNotifications,
+  unsubscribeFromPushNotifications,
+  sendTestNotification,
+} from '@/entities/notification/api';
 import { toast } from 'sonner';
 
 export const PushNotificationsSettings: FC = () => {
@@ -18,6 +22,7 @@ export const PushNotificationsSettings: FC = () => {
     requestPermission,
   } = usePushSubscription();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isSendingTest, setIsSendingTest] = useState(false);
 
   const handleToggle = async () => {
     if (isProcessing) return;
@@ -175,6 +180,54 @@ export const PushNotificationsSettings: FC = () => {
           <div className="text-sm text-amber-600 bg-amber-50 p-3 rounded-lg">
             {t('notifications.permissionDeniedHelp')}
           </div>
+        )}
+
+        {isSubscribed && (
+          <>
+            <Divider />
+            <div className="space-y-3">
+              <div>
+                <h3 className="text-sm font-medium text-gray-900 mb-2">
+                  Тестирование
+                </h3>
+                <p className="text-xs text-gray-600 mb-3">
+                  Отправьте тестовое уведомление, чтобы проверить работу системы.
+                  Уведомление придет даже если вы находитесь на странице.
+                </p>
+                <Button
+                  onClick={async () => {
+                    if (isSendingTest) return;
+                    setIsSendingTest(true);
+                    try {
+                      await sendTestNotification(
+                        '🧪 Тестовое уведомление',
+                        'Если вы видите это уведомление, значит push-уведомления работают корректно!',
+                      );
+                      toast.success('Тестовое уведомление отправлено!', {
+                        description: 'Проверьте, появилось ли уведомление',
+                      });
+                    } catch (error) {
+                      console.error('Error sending test notification:', error);
+                      toast.error('Ошибка отправки тестового уведомления', {
+                        description:
+                          error instanceof Error
+                            ? error.message
+                            : 'Не удалось отправить уведомление',
+                      });
+                    } finally {
+                      setIsSendingTest(false);
+                    }
+                  }}
+                  disabled={isSendingTest}
+                  variant="outline"
+                  size="sm"
+                  className="w-full"
+                >
+                  {isSendingTest ? 'Отправка...' : '📤 Отправить тестовое уведомление'}
+                </Button>
+              </div>
+            </div>
+          </>
         )}
       </div>
     </div>

@@ -15,12 +15,12 @@ const getApiBaseUrl = (): string => {
   
   // Приоритет: если это IP адрес локальной сети, используем его с портом 4000
   if (host.startsWith('192.168.') || host.startsWith('10.') || host.startsWith('172.')) {
-    return `http://0.0.0.0:4000/`;
+    return `http://${host}:4000`;
   }
 
   // Если localhost, используем localhost:4000
   if (host === 'localhost' || host === '127.0.0.1') {
-    return 'http://0.0.0.0:4000/';
+    return 'http://localhost:4000';
   }
 
   // По умолчанию production URL

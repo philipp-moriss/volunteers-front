@@ -25,9 +25,23 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
   });
 
   // Также слушаем события от Service Worker для отладки
-  navigator.serviceWorker.ready.then(() => {
+  navigator.serviceWorker.ready.then(async (registration) => {
     console.log('🔔 [App] Service Worker ready, checking notifications support');
     console.log('🔔 [App] Notification permission:', Notification.permission);
+    
+    // Проверяем текущую подписку
+    try {
+      const subscription = await registration.pushManager.getSubscription();
+      if (subscription) {
+        console.log('✅ [App] Active subscription found:', {
+          endpoint: subscription.endpoint.substring(0, 50) + '...',
+        });
+      } else {
+        console.warn('⚠️ [App] No active subscription found');
+      }
+    } catch (error) {
+      console.error('❌ [App] Error checking subscription:', error);
+    }
     
     // Проверяем, можем ли мы показать уведомление
     if (Notification.permission === 'granted') {
@@ -83,11 +97,6 @@ export const App: FC<AppProviderProps> = ({ children }) => {
       return;
     }
 
-    // Если уже подписан, ничего не делаем
-    if (isSubscribed) {
-      return;
-    }
-
     // Проверяем, запрашивали ли мы разрешение ранее
     const hasRequestedBefore = safeLocalStorage.getItem('push-permission-requested') === 'true';
 
@@ -103,16 +112,51 @@ export const App: FC<AppProviderProps> = ({ children }) => {
       return;
     }
 
-    // Если разрешение уже получено ранее, подписываемся автоматически
+    // Если уже подписан, проверяем, что подписка отправлена на сервер
+    if (isSubscribed) {
+      // Проверяем, была ли подписка отправлена на сервер
+      const subscriptionSent = safeLocalStorage.getItem('push-subscription-sent') === 'true';
+      if (!subscriptionSent) {
+        // Если подписка есть, но не отправлена на сервер, отправляем
+        navigator.serviceWorker.ready.then(async (registration) => {
+          const subscription = await registration.pushManager.getSubscription();
+          if (subscription) {
+            try {
+              await subscribeToPushNotifications(subscription);
+              safeLocalStorage.setItem('push-subscription-sent', 'true');
+              console.log('✅ [App] Existing subscription sent to server');
+            } catch (error) {
+              console.error('❌ [App] Ошибка отправки существующей подписки:', error);
+            }
+          }
+        });
+      }
+      return;
+    }
+
+    // Если разрешение уже получено ранее, но подписки нет, подписываемся автоматически
     if (permission === 'granted' && !isSubscribed) {
+      console.log('🔔 [App] Permission granted, subscribing to push notifications...');
       subscribe().then(async (subscription) => {
         if (subscription) {
+          console.log('🔔 [App] Subscription created:', {
+            endpoint: subscription.endpoint.substring(0, 50) + '...',
+            hasKeys: !!subscription.getKey('p256dh') && !!subscription.getKey('auth'),
+          });
           try {
             await subscribeToPushNotifications(subscription);
+            safeLocalStorage.setItem('push-subscription-sent', 'true');
+            console.log('✅ [App] Subscription sent to server successfully');
           } catch (error) {
-            console.error('Ошибка регистрации подписки:', error);
+            console.error('❌ [App] Ошибка регистрации подписки:', error);
+            safeLocalStorage.setItem('push-subscription-sent', 'false');
           }
+        } else {
+          console.warn('⚠️ [App] Subscription is null');
         }
+      }).catch((error) => {
+        console.error('❌ [App] Failed to subscribe:', error);
+        safeLocalStorage.setItem('push-subscription-sent', 'false');
       });
     }
   }, [isSupported, permission, isSubscribed, subscribe, requestPermission, permissionRequested]);

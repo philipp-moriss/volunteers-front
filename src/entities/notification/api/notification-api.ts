@@ -41,6 +41,25 @@ export async function unsubscribeFromPushNotifications(
 }
 
 /**
+ * Отправка тестового push-уведомления
+ */
+export async function sendTestNotification(
+  title?: string,
+  body?: string,
+): Promise<{ success: boolean; message: string }> {
+  return apiClient.request<{ success: boolean; message: string }>(
+    '/notifications/test-public',
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        title: title || '🧪 Тестовое уведомление',
+        body: body || 'Это тестовое push-уведомление для проверки работы системы',
+      }),
+    },
+  );
+}
+
+/**
  * Конвертация ArrayBuffer в base64
  */
 function arrayBufferToBase64(buffer: ArrayBuffer): string {

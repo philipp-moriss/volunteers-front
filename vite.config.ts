@@ -11,6 +11,10 @@ export default defineConfig({
       srcDir: "src",
       filename: "sw.ts",
       registerType: "autoUpdate",
+      injectManifest: {
+        // В dev режиме используем наш sw.ts напрямую
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
+      },
       includeAssets: [
         "favicon.ico",
         "favicon-16x16.png",
@@ -64,8 +68,9 @@ export default defineConfig({
       },
       devOptions: {
         enabled: true, // Включено для тестирования push-уведомлений в dev режиме
-        type: "classic",
+        type: "module", // Module type для поддержки ES6 импортов
         navigateFallback: "index.html",
+        suppressWarnings: true,
       },
     }),
   ],
