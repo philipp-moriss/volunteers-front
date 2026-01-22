@@ -39,9 +39,8 @@ export const TaskDetailsPage = () => {
             loop={false}
             className="w-full h-1/2"
             onComplete={() => {
-              navigate(`/volunteer/tasks/:${taskId}/completed`)
+              navigate(`/volunteer/tasks/${taskId}/completed`)
             }}
-            // className="w-72 h-72"
           />
         </div>
       )}
@@ -57,7 +56,7 @@ export const TaskDetailsPage = () => {
             <p className="text-textGray font-normal">{taskId}</p>
             <Card variant={'elevated'} className={'p-4 flex flex-col gap-3 items-start text-left w-full'}>
               <p className="text-textGray font-normal">To carry out the task, please contact</p>
-              <p className="text-textGray font-medium">Sara Cohen</p>
+              <p className="text-textGray font-medium">{task.needy?.firstName} {task.needy?.lastName}</p>
               <a href="tel:0501234567">
                 <p className={'text-deepBlue font-normal flex flex-row items-center gap-2'}>
               <span>
@@ -67,10 +66,10 @@ export const TaskDetailsPage = () => {
                   alt="icon"
                 />
               </span>
-                  <span> +12345</span>
+                  <span>{task.needy?.phone}</span>
                 </p>
               </a>
-              <a href={"sms:0501234567"}>
+              <a href={`sms:${task.needy?.phone}`}>
                 <p className={'text-deepBlue font-normal flex flex-row items-center gap-2'}>
               <span>
                 <img
@@ -82,7 +81,7 @@ export const TaskDetailsPage = () => {
                   Send a message
                 </p>
               </a>
-              <a href="https://wa.me/0501234567"
+              <a href={`https://wa.me/${task.needy?.phone}`}
                  target="_blank"
                  rel="noopener noreferrer" >
                 <p className={'text-deepBlue font-normal flex flex-row items-center gap-2'}>
