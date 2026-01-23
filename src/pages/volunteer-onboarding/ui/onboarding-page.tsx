@@ -469,7 +469,7 @@ export const OnboardingPage: FC = () => {
                     {currentStep !== 'program' && (
                         <>
                             <div className="mb-8">
-                                <h1 className="text-2xl font-bold text-primary mb-2">
+                                <h1 className="text-3xl font-bold text-deepBlue mb-2">
                                     Eshkol Volunteers
                                 </h1>
                             </div>

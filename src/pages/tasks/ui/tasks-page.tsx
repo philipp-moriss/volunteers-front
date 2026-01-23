@@ -1,7 +1,7 @@
 import {FC, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {TaskList} from '@/widgets/task-list';
-import {Header} from '@/shared/ui';
+import {Header, IconButton} from '@/shared/ui';
 import {useGetTasks} from "@/entities/task/hook";
 import {Tabs} from "@/shared/ui/tabs";
 import userIcon from '@/shared/assets/images/userIcon.webp';
@@ -9,15 +9,15 @@ import userIcon from '@/shared/assets/images/userIcon.webp';
 export const TasksPage: FC = () => {
   const {t} = useTranslation();
   const tabs = ['All tasks', 'My tasks'];
-  const [, setActiveTab] = useState(tabs[0]);
+  const [activeTab, setActiveTab] = useState(tabs[0]);
 
 
   const {data: tasks = []} = useGetTasks();
 
 
   return (
-    <section className={'mb-12'}>
-      <div className="min-h-screen bg-gray-50">
+    <section className={'mb-12 bg-light-blue-gradient'}>
+      <div className="min-h-screen">
         <Header
           title={t('tasks.title')}
           rightActions={[
