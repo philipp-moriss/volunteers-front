@@ -1,7 +1,7 @@
 import {FC, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {TaskList} from '@/widgets/task-list';
-import {Header} from '@/shared/ui';
+import {Header, IconButton} from '@/shared/ui';
 import {useGetTasks} from "@/entities/task/hook";
 import {Tabs} from "@/shared/ui/tabs";
 import userIcon from '@/shared/assets/images/userIcon.webp';
