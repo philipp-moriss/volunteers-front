@@ -36,21 +36,32 @@ export const AuthPage: FC = () => {
   }, [user, isLoading, navigate]);
 
   const handleSendCode = async () => {
-    if (phone) {
-      try {
-        const response = await sendSmsMutation.mutateAsync({
-          phoneNumber: phone,
-          isDev: true,
-        });
-        setShowCodeInput(true);
-        // Сохраняем dev код если он есть в ответе
-        if (isDev && response?.code) {
-          setDevCode(response.code);
-        }
-      } catch (error) {
-        // Ошибка уже обработана в хуке через toast
-        console.error('Failed to send SMS:', error);
+    if (!phone) {
+      return;
+    }
+
+    try {
+      console.log('📱 [Auth] Отправка SMS для номера:', phone);
+      const response = await sendSmsMutation.mutateAsync({
+        phoneNumber: phone,
+        isDev: isDev,
+      });
+      
+      console.log('✅ [Auth] SMS отправлен успешно, ответ:', response);
+      
+      // Показываем поле ввода кода после успешной отправки
+      setShowCodeInput(true);
+      console.log('✅ [Auth] Поле ввода кода показано');
+      
+      // Сохраняем dev код если он есть в ответе
+      if (isDev && response?.code) {
+        setDevCode(response.code);
+        console.log('🔧 DEV MODE: SMS код:', response.code);
       }
+    } catch (error) {
+      // Ошибка уже обработана в хуке через toast
+      console.error('❌ [Auth] Ошибка отправки SMS:', error);
+      // Не показываем поле ввода кода при ошибке, так как SMS не был отправлен
     }
   };
 
