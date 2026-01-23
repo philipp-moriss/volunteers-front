@@ -27,3 +27,6 @@ public/workbox-*.js.map
 *.njsproj
 *.sln
 *.sw?
+
+.env
+.env.local

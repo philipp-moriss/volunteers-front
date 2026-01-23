@@ -47,7 +47,7 @@ export const Header: FC<HeaderProps> = ({
         )}
                 {leftAction}
                 {title && (
-                    <h1 className="text-3xl font-sans font-normal text-primary truncate">{title}</h1>
+                    <h1 className="text-3xl font-sans font-normal text-primary">{title}</h1>
                 )}
             </div>
             {rightActions && rightActions.length > 0 && (

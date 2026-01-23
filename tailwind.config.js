@@ -32,6 +32,8 @@ export default {
           purple: '#F3E5F5',
         },
         deepBlue: '#004573',
+        backGround: '#EFF8FF',
+        textGray:  '#313e44',
       },
       borderRadius: {
         'xl': '12px',

@@ -1,19 +1,29 @@
-import { FC } from 'react';
-import { Task } from '../../model/types';
+import {FC} from 'react';
+import {Task} from '../../model/types';
+import {useNavigate} from "react-router-dom";
 
 interface TaskCardProps {
   task: Task;
 }
 
-export const TaskCard: FC<TaskCardProps> = ({ task }) => {
-  return (
-    <div className='flex items-center justify-between border border-[#e0e7ff] rounded-2xl p-4 shadow-[2px_2px_0_0_#e0e7ff] bg-white'>
+export const TaskCard: FC<TaskCardProps> = ({task}) => {
 
-      <div className="flex flex-col justify-between">
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate(`/volunteer/tasks/${task.id}/preview`)
+  }
+
+  return (
+    <div
+      className='flex items-center justify-between border border-[#e0e7ff] rounded-2xl p-4 shadow-[2px_2px_0_0_#e0e7ff] bg-white'
+      onClick={handleClick}
+    >
+
+      <div className="flex flex-col justify-between min-w-0 max-w">
 
         <span
           className={`
-            font-sans text-[14px] font-normal text-[#393939] px-2 py-0.5 rounded-full w-fit mb-1
+            font-sans text-[14px] font-normal text-[#393939] px-2 py-0.5 rounded-full w-fit mb-1 
             ${task.status === 'active' && 'bg-pastel-peach'}
             ${task.status === 'in_progress' && 'bg-pastel-blue '}
             ${task.status === 'completed' && 'bg-pastel-green'}
@@ -36,7 +46,8 @@ export const TaskCard: FC<TaskCardProps> = ({ task }) => {
         </p>
       </div>
 
-      <div className="w-[88px] h-[88px] rounded-xl bg-blue-50 flex items-center justify-center overflow-hidden shrink-0">
+      <div
+        className="w-[88px] h-[88px] rounded-xl bg-blue-50 flex items-center justify-center overflow-hidden shrink-0">
         <img
           src="/task-placeholder.png"
           alt=""

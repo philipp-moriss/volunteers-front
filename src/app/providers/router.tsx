@@ -8,6 +8,9 @@ import { LeaderboardPage } from '@/pages/leaderboard/ui';
 import { SettingsPage } from '@/pages/settings/ui';
 import { PrivateRoute } from './private-route';
 import { RoleRedirect } from './role-redirect';
+import { TaskPreviewPage } from '@/pages/tasks/ui';
+import {TaskDetailsPage} from "@/pages/tasks/ui/task-details.tsx";
+import {TaskCompletedPage} from "@/pages/tasks/ui/task-completed.tsx";
 
 export const Router: FC = () => {
   return (
@@ -68,6 +71,24 @@ export const Router: FC = () => {
             </PrivateRoute>
           }
         />
+
+        <Route path="/volunteer/tasks/:taskId/preview" element={
+          <PrivateRoute allowedRoles={['volunteer']}>
+            <TaskPreviewPage />
+          </PrivateRoute>
+        } />
+
+        <Route path={"/volunteer/tasks/:taskId"} element={
+          <PrivateRoute allowedRoles={['volunteer']}>
+            <TaskDetailsPage />
+          </PrivateRoute>
+        } />
+
+        <Route path={"/volunteer/tasks/:taskId/completed"} element={
+          <PrivateRoute allowedRoles={['volunteer']}>
+            <TaskCompletedPage />
+          </PrivateRoute>
+        } />
 
         {/* Роуты для нуждающихся */}
         <Route

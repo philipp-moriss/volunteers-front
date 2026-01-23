@@ -20,6 +20,10 @@ export interface Task {
   id: string;
   programId: string;
   needyId: string;
+
+  needy?: Needy;
+  category?: Category;
+
   type: string;
   title: string;
   description: string;
@@ -69,4 +73,27 @@ export interface ApproveVolunteerDto {
 
 export interface AssignVolunteerDto {
   volunteerId: string;
+}
+
+export interface Needy {
+  id: string;
+  phone: string;
+  email: string;
+  role: string;
+  status: string;
+  firstName: string;
+  lastName: string;
+  photo: string;
+  about: string;
+  lastLoginAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  iconSvg: string;
+  createdAt: string;
+  updatedAt: string;
 }
