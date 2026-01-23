@@ -8,6 +8,8 @@ export const CategoriesPage = () => {
     const [step, setStep] = useState<'categories' | 'skills' | 'details' | `task`>('categories');
     const [activeTab, setActiveTab] = useState<'tasks' | 'help'>('help');
     const [selectedSkillsId, setSelectedSkillsId] = useState<string[]>([]);
+    const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
+
     const { t } = useTranslation();
     const handleSkillsSubmit = (skills: string[]) => {
         setSelectedSkillsId(skills);
@@ -25,7 +27,7 @@ export const CategoriesPage = () => {
         },
         details: {
             title: t("taskDetails.headerTitle"),
-            subtitle: t("taskDetails.checkboxMarkUrgent")
+            subtitle: t("taskDetails.headerSubtitle")
         },
         task: {
             title: "My tasks",
@@ -47,7 +49,11 @@ export const CategoriesPage = () => {
             {activeTab === 'help' ? (
                 <>
                     {step === 'categories' && (
-                        <CategoriesView onNext={() => setStep('skills')} />
+                        <CategoriesView
+                            onNext={() => setStep('skills')}
+                            selectedCategoryId={selectedCategoryId}
+                            onCategorySelect={setSelectedCategoryId}
+                        />
                     )}
 
                     {step === 'skills' && (
@@ -60,6 +66,7 @@ export const CategoriesPage = () => {
                             onBack={() => setStep("skills")}
                             onNextTab={() => setActiveTab("tasks")}
                             onNext={()=> setStep("task")}
+                            categoryId={selectedCategoryId}
                         />
                     )}
                 </>

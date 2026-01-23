@@ -184,12 +184,12 @@
   "categorySkillsView": {
     "headerTitle": "What exactly do you need?",
     "headerSubtitle": "Details will help us match the right volunteers to you.",
-    "submitButton": "Find a volunteer",
+    "submitButton": "Next",
     "privacyNote": "Your details remain confidential. Volunteers only access the task description."
   },
   "taskDetails": {
     "headerTitle": "Got it!",
-    "headerSubtitle": "We will contact you in the next few hours to coordinate.",
+    "headerSubtitle": "Details will help us match the right volunteers to you.",
     "checkboxMarkUrgent": "Mark as urgent",
     "labelAddTime": "Add time",
     "labelDate": "Date",
@@ -197,6 +197,6 @@
     "tagUrgent": "Urgent",
     "selectedSkills": "Selected skills",
     "labelAnythingElse": "Do you need anything else?",
-    "buttonGoToTasks": "Go to my tasks"
+    "buttonGoToTasks": "Create task"
   }
 }

@@ -201,12 +201,12 @@
   "categorySkillsView": {
     "headerTitle": "מה בדיוק דרוש לכם?",
     "headerSubtitle": "הפרטים יסייעו לנו להתאים לכם את המתנדבים המתאימים ביותר.",
-    "submitButton": "מציאת מתנדב",
+    "submitButton": "הבא",
     "privacyNote": "הפרטים שלכם נשארים חסויים. למתנדבים תהיה גישה רק לתיאור המשימה."
   },
   "taskDetails": {
     "headerTitle": "קיבלנו!",
-    "headerSubtitle": "ניצור איתכם קשר בשעות הקרובות לתיאום.",
+    "headerSubtitle": "הפרטים יסייעו לנו להתאים לכם את המתנדבים המתאימים ביותר.",
     "checkboxMarkUrgent": "סימון כדחוף",
     "labelAddTime": "הוספת שעה",
     "labelDate": "תאריך",
@@ -214,6 +214,6 @@
     "tagUrgent": "דחוף",
     "selectedSkills": "מיומנויות שנבחרו",
     "labelAnythingElse": "האם דרוש לכם משהו נוסף?",
-    "buttonGoToTasks": "מעבר למשימות שלי"
+    "buttonGoToTasks": "צור משימה"
   }
 }

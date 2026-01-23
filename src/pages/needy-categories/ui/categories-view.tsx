@@ -4,7 +4,17 @@ import {CategorySelector} from "@/features/select-categories/ui";
 import {PopularTaskScroll} from "@/features/popular-task-scroll/ui";
 import {Button} from "@/shared/ui";
 
-export const CategoriesView = ({ onNext }: { onNext: () => void }) => {
+type CategoriesViewType = {
+    onNext: () => void;
+    selectedCategoryId: string;
+    onCategorySelect: (id: string) => void;
+}
+
+export const CategoriesView = ({
+onNext,
+selectedCategoryId,
+onCategorySelect
+}: CategoriesViewType) => {
     const { t } = useTranslation();
     return (
         <div className="pt-[120px] pb-[150px]">
@@ -42,7 +52,10 @@ export const CategoriesView = ({ onNext }: { onNext: () => void }) => {
             <h2 className={"text-[20px] font-normal mt-6 px-[20px]"}>
                 {t("categoriesNeedy.categoriesTitle")}
             </h2>
-            <CategorySelector />
+            <CategorySelector
+                selectedId={selectedCategoryId}
+                onSelect={onCategorySelect}
+            />
 
             {/* Выбор комьюнити */}
             <h2 className={"text-[20px] font-normal mt-6 px-[20px]"}>
@@ -56,6 +69,7 @@ export const CategoriesView = ({ onNext }: { onNext: () => void }) => {
                         variant="primary"
                         fullWidth
                         onClick={onNext}
+                        disabled={!selectedCategoryId}
                     >
                         {t("categoriesNeedy.nextButton")}
                     </Button>

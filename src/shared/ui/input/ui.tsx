@@ -1,4 +1,4 @@
-import { FC, InputHTMLAttributes, ReactNode } from 'react';
+import {forwardRef, InputHTMLAttributes, ReactNode} from 'react';
 import { cn } from '@/shared/lib/utils/cn';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -8,14 +8,14 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   iconPosition?: 'left' | 'right';
 }
 
-export const Input: FC<InputProps> = ({
-  label,
-  error,
-  icon,
-  iconPosition = 'left',
-  className,
-  ...props
-}) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>(({
+label,
+error,
+icon,
+iconPosition = 'left',
+className,
+...props
+}, ref) => {
   return (
     <div className="w-full">
       {label && (
@@ -30,6 +30,7 @@ export const Input: FC<InputProps> = ({
           </div>
         )}
         <input
+          ref={ref}
           className={cn(
             'w-full px-4 py-2 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-400',
             'focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent',
@@ -47,9 +48,6 @@ export const Input: FC<InputProps> = ({
           </div>
         )}
       </div>
-      {error && (
-        <p className="mt-1 text-sm text-red-600">{error}</p>
-      )}
     </div>
   );
-};
+});

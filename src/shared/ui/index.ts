@@ -9,3 +9,5 @@ export * from "./divider";
 export * from "./textarea";
 export * from "./language-switcher";
 export * from "./modal";
+export * from "./switch";
+export * from "./Icon";
