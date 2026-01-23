@@ -205,10 +205,6 @@ self.addEventListener('push', (event: PushEvent) => {
           tag: notificationData.tag,
           requireInteraction: false,
           silent: false,
-          // Добавляем вибрацию для лучшей заметности
-          vibrate: [200, 100, 200],
-          // Показываем уведомление даже если окно в фокусе
-          renotify: true,
         };
 
         // Проверяем активные клиенты
