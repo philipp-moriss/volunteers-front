@@ -1,6 +1,7 @@
 import {Button} from "@/shared/ui";
 import {SelectSubcategoryListItems} from "@/features/select-subcategory-list/ui";
 import {useState} from "react";
+import {Icon} from "@/shared/ui/Icon";
 
 export const CategorySkillsView = ({ onNext }: { onNext: (skills: string[]) => void }) => {    const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
 
@@ -37,10 +38,7 @@ export const CategorySkillsView = ({ onNext }: { onNext: (skills: string[]) => v
                     </Button>
                     <div className="flex  mt-3">
                     <div className="mr-2">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.99994 14.4579C10.7501 14.4579 11.3583 13.8497 11.3583 13.0995C11.3583 12.3494 10.7501 11.7412 9.99994 11.7412C9.24975 11.7412 8.6416 12.3494 8.6416 13.0995C8.6416 13.8497 9.24975 14.4579 9.99994 14.4579Z" fill="#5B5B5B"/>
-                        <path d="M15.2334 7.94199V6.90033C15.2334 4.65033 14.6917 1.66699 10.0001 1.66699C5.30841 1.66699 4.76675 4.65033 4.76675 6.90033V7.94199C2.43341 8.23366 1.66675 9.41699 1.66675 12.3253V13.8753C1.66675 17.292 2.70841 18.3337 6.12508 18.3337H13.8751C17.2917 18.3337 18.3334 17.292 18.3334 13.8753V12.3253C18.3334 9.41699 17.5667 8.23366 15.2334 7.94199ZM10.0001 15.617C8.60841 15.617 7.48341 14.4837 7.48341 13.1003C7.48341 11.7087 8.61675 10.5837 10.0001 10.5837C11.3834 10.5837 12.5167 11.717 12.5167 13.1003C12.5167 14.492 11.3917 15.617 10.0001 15.617ZM6.12508 7.86699C6.05841 7.86699 6.00008 7.86699 5.93341 7.86699V6.90033C5.93341 4.45866 6.62508 2.83366 10.0001 2.83366C13.3751 2.83366 14.0667 4.45866 14.0667 6.90033V7.87533C14.0001 7.87533 13.9417 7.87533 13.8751 7.87533H6.12508V7.86699Z" fill="#5B5B5B"/>
-                    </svg>
+                        <Icon iconId={"icon-lock"} size={20}/>
                     </div>
                     <p className={"text-[14px] font-normal text-[#5B5B5B]"}>Your details remain confidential. Volunteers only access the task description.</p>
                     </div>

@@ -32,7 +32,6 @@ export const CategoriesPage = () => {
             subtitle: "Waiting for volunteers"
         }
     };
-
     const currentHeader = headerContent[step];
 
     return (
@@ -44,7 +43,6 @@ export const CategoriesPage = () => {
                     <p className="mt-2 text-gray-500 text-[18px] font-normal">
                         {currentHeader.subtitle}
                     </p>
-
             </div>
             {activeTab === 'help' ? (
                 <>
