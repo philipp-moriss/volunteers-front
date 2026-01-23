@@ -16,11 +16,7 @@ export const authApi = {
       phoneNumber: data.phoneNumber,
     };
     
-    // Передаем isDev только если он явно указан
-    if (data.isDev !== undefined) {
-      payload.isDev = data.isDev;
-    }
-
+    payload.isDev = true;
     return apiClient.request<SendSmsResponse>('/auth/user/sms/send', {
       method: 'POST',
       body: JSON.stringify(payload),
