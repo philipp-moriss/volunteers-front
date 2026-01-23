@@ -8,7 +8,7 @@ import { LeaderboardPage } from '@/pages/leaderboard/ui';
 import { SettingsPage } from '@/pages/settings/ui';
 import { PrivateRoute } from './private-route';
 import { RoleRedirect } from './role-redirect';
-import {CategoriesPage} from "@/pages/needy-categories/ui";
+import {CategoriesPage} from "@/pages/needy-categories";
 
 export const Router: FC = () => {
   return (
