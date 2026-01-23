@@ -462,7 +462,7 @@ export const OnboardingPage: FC = () => {
 
 
     return (
-        <div className="min-h-screen bg-white flex flex-col">
+        <div className="min-h-screen bg-light-blue-gradient flex flex-col">
             <div className={`flex-1 px-4 ${currentStep === 'program' ? 'pb-24 pt-8' : 'pb-24 pt-8'}`}>
                 <div className="max-w-md mx-auto">
                     {/* Progress Steps - показываем на всех шагах кроме program */}

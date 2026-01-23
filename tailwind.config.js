@@ -40,6 +40,9 @@ export default {
         '2xl': '16px',
         '3xl': '20px',
       },
+      backgroundImage: {
+        'light-blue-gradient': 'linear-gradient(180deg, rgba(221,241,255,0.4) 0%, rgba(255,255,255,0.4) 24.11%)',
+      },
     },
   },
   plugins: [],
