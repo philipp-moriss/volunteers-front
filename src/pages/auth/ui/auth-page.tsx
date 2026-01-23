@@ -46,13 +46,13 @@ export const AuthPage: FC = () => {
         phoneNumber: phone,
         isDev: isDev,
       });
-      
+
       console.log('✅ [Auth] SMS отправлен успешно, ответ:', response);
-      
+
       // Показываем поле ввода кода после успешной отправки
       setShowCodeInput(true);
       console.log('✅ [Auth] Поле ввода кода показано');
-      
+
       // Сохраняем dev код если он есть в ответе
       if (isDev && response?.code) {
         setDevCode(response.code);
