@@ -17,6 +17,7 @@ export const PushNotificationsSettings: FC = () => {
     isSubscribed,
     isLoading,
     error,
+    subscription,
     subscribe,
     unsubscribe,
     requestPermission,
@@ -30,9 +31,10 @@ export const PushNotificationsSettings: FC = () => {
     setIsProcessing(true);
     try {
       if (isSubscribed) {
+        const endpoint = subscription?.endpoint;
         const success = await unsubscribe();
         if (success) {
-          await unsubscribeFromPushNotifications();
+          await unsubscribeFromPushNotifications(endpoint);
           toast.success(t('notifications.disabled'));
         }
       } else {

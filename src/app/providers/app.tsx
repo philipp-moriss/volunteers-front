@@ -82,6 +82,32 @@ export const App: FC<AppProviderProps> = ({ children }) => {
   const [showPushRequestModal, setShowPushRequestModal] = useState(false);
   const [permissionRequested, setPermissionRequested] = useState(false);
 
+  // Обработчик события успешной авторизации
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const handleUserAuthenticated = () => {
+      // Сбрасываем флаг запроса разрешения при новой авторизации
+      // Это позволяет запросить разрешение снова, если пользователь вышел и зашел заново
+      const token = getToken();
+      if (token) {
+        // Не сбрасываем, если уже есть подписка
+        const hasSubscription = safeLocalStorage.getItem('push-subscription-sent') === 'true';
+        if (!hasSubscription) {
+          safeLocalStorage.setItem('push-permission-requested', 'false');
+          setPermissionRequested(false);
+        }
+      }
+    };
+
+    window.addEventListener('user-authenticated', handleUserAuthenticated);
+    return () => {
+      window.removeEventListener('user-authenticated', handleUserAuthenticated);
+    };
+  }, []);
+
   // Автоматический запрос разрешения и подписка на push-уведомления после авторизации
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -105,10 +131,10 @@ export const App: FC<AppProviderProps> = ({ children }) => {
       setPermissionRequested(true);
       safeLocalStorage.setItem('push-permission-requested', 'true');
       
-      // Показываем модальное окно с задержкой
+      // Показываем модальное окно с задержкой после авторизации
       setTimeout(() => {
         setShowPushRequestModal(true);
-      }, 2000);
+      }, 3000);
       return;
     }
 

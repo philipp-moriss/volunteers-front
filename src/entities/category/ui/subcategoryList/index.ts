@@ -1,0 +1,1 @@
+export { SubcategoryList } from "./subcategory-list.tsx"

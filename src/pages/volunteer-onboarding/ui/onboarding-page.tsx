@@ -117,7 +117,8 @@ export const OnboardingPage: FC = () => {
 
             case 'skills':
                 return (
-                    <>
+                    <Container className={'flex flex-col items-stretch gap-3 pt-12'}>
+                        <h6 className={'text-deepBlue text-lg font-medium'}>What am I good at?</h6>
                         <div className="flex flex-col gap-3 mb-4">
                             {skills.map((skill) => {
                                 const isSelected = data.skills.includes(skill.id);
@@ -172,7 +173,7 @@ export const OnboardingPage: FC = () => {
                             </div>
                             <span className="font-medium">{t('onboarding.add')}</span>
                         </div>
-                    </>
+                    </Container>
                 );
 
             case 'city':
@@ -467,14 +468,14 @@ export const OnboardingPage: FC = () => {
                 <div className="max-w-md mx-auto">
                     {/* Progress Steps - показываем на всех шагах кроме program */}
                     {currentStep !== 'program' && (
-                        <>
+                        <Container>
                             <div className="mb-8">
                                 <h1 className="text-3xl font-bold text-deepBlue mb-2">
                                     Eshkol Volunteers
                                 </h1>
                             </div>
                             <ProgressSteps currentStepIndex={currentStepIndex} totalSteps={steps.length} />
-                        </>
+                        </Container>
                     )}
 
                     {/* Step Content */}

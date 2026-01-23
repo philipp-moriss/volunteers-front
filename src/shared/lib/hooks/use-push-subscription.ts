@@ -25,18 +25,56 @@ export function usePushSubscription() {
 
   // Проверка поддержки браузером
   useEffect(() => {
-    const isSupported =
-      typeof window !== 'undefined' &&
-      'serviceWorker' in navigator &&
-      'PushManager' in window &&
-      'Notification' in window &&
-      typeof Notification !== 'undefined' &&
-      isVapidConfigured();
+    // Проверка базовых API
+    const hasServiceWorker = typeof window !== 'undefined' && 'serviceWorker' in navigator;
+    const hasPushManager = typeof window !== 'undefined' && 'PushManager' in window;
+    const hasNotification = typeof window !== 'undefined' && 'Notification' in window && typeof Notification !== 'undefined';
+    const hasVapid = isVapidConfigured();
+    
+    // Проверка secure context (HTTPS или localhost)
+    const isSecureContext = typeof window !== 'undefined' && window.isSecureContext;
+    
+    // Проверка, что мы на localhost или HTTPS
+    const isLocalhost = typeof window !== 'undefined' && (
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1'
+    );
+    const isHTTPS = typeof window !== 'undefined' && window.location.protocol === 'https:';
+    
+    // Для iOS Safari требуется secure context (HTTPS или localhost)
+    const isIOS = typeof window !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isSafari = typeof window !== 'undefined' && /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    
+    const isSupported = 
+      hasServiceWorker &&
+      hasPushManager &&
+      hasNotification &&
+      hasVapid &&
+      isSecureContext &&
+      (isLocalhost || isHTTPS || !isIOS || !isSafari); // На iOS Safari требуется localhost или HTTPS
 
     const permission: NotificationPermission = 
       isSupported && typeof Notification !== 'undefined' 
         ? Notification.permission 
         : 'denied';
+
+    // Логирование для отладки
+    if (typeof window !== 'undefined') {
+      console.log('🔔 [Hook] Push support check:', {
+        hasServiceWorker,
+        hasPushManager,
+        hasNotification,
+        hasVapid,
+        isSecureContext,
+        isLocalhost,
+        isHTTPS,
+        isIOS,
+        isSafari,
+        hostname: window.location.hostname,
+        protocol: window.location.protocol,
+        isSupported,
+      });
+    }
 
     setState((prev) => ({
       ...prev,
@@ -87,9 +125,23 @@ export function usePushSubscription() {
   // Запрос разрешения
   const requestPermission = useCallback(async (): Promise<boolean> => {
     if (!state.isSupported || typeof window === 'undefined' || typeof Notification === 'undefined') {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const isHTTPS = window.location.protocol === 'https:';
+      
+      let errorMessage = 'Push notifications are not supported';
+      if (isIOS && isSafari && !isLocalhost && !isHTTPS) {
+        errorMessage = 'Push notifications require HTTPS or localhost on iOS Safari. Please use localhost or deploy with HTTPS.';
+      } else if (!window.isSecureContext) {
+        errorMessage = 'Push notifications require a secure context (HTTPS or localhost)';
+      } else if (!isVapidConfigured()) {
+        errorMessage = 'VAPID key is not configured';
+      }
+      
       setState((prev) => ({
         ...prev,
-        error: 'Push notifications are not supported',
+        error: errorMessage,
       }));
       return false;
     }
@@ -114,9 +166,26 @@ export function usePushSubscription() {
   // Подписка на push-уведомления
   const subscribe = useCallback(async (): Promise<PushSubscription | null> => {
     if (!state.isSupported) {
+      const isIOS = typeof window !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
+      const isSafari = typeof window !== 'undefined' && /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      const isLocalhost = typeof window !== 'undefined' && (
+        window.location.hostname === 'localhost' || 
+        window.location.hostname === '127.0.0.1'
+      );
+      const isHTTPS = typeof window !== 'undefined' && window.location.protocol === 'https:';
+      
+      let errorMessage = 'Push notifications are not supported';
+      if (isIOS && isSafari && !isLocalhost && !isHTTPS) {
+        errorMessage = 'Push notifications require HTTPS or localhost on iOS Safari. Please use localhost or deploy with HTTPS.';
+      } else if (typeof window !== 'undefined' && !window.isSecureContext) {
+        errorMessage = 'Push notifications require a secure context (HTTPS or localhost)';
+      } else if (!isVapidConfigured()) {
+        errorMessage = 'VAPID key is not configured';
+      }
+      
       setState((prev) => ({
         ...prev,
-        error: 'Push notifications are not supported',
+        error: errorMessage,
       }));
       return null;
     }

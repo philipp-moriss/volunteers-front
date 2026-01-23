@@ -169,5 +169,34 @@
   },
   "settings": {
     "title": "Settings"
+  },
+  "categoriesNeedy": {
+    "headerTitle": "How can we help?",
+    "aiPrompt": "Share what happened, and AI will create the task for you to edit and approve before saving.",
+    "searchPlaceholder": "e.g., help with grocery shopping...",
+    "recentTasksTitle": "My Recent Tasks",
+    "categoriesTitle": "Search by Categories",
+    "mostRequestedTitle": "Most requested in the community",
+    "nextButton": "Next",
+    "tabMyTasks": "My Tasks",
+    "tabRequestHelp": "Request Help"
+  },
+  "categorySkillsView": {
+    "headerTitle": "What exactly do you need?",
+    "headerSubtitle": "Details will help us match the right volunteers to you.",
+    "submitButton": "Next",
+    "privacyNote": "Your details remain confidential. Volunteers only access the task description."
+  },
+  "taskDetails": {
+    "headerTitle": "Got it!",
+    "headerSubtitle": "Details will help us match the right volunteers to you.",
+    "checkboxMarkUrgent": "Mark as urgent",
+    "labelAddTime": "Add time",
+    "labelDate": "Date",
+    "labelTime": "Time",
+    "tagUrgent": "Urgent",
+    "selectedSkills": "Selected skills",
+    "labelAnythingElse": "Do you need anything else?",
+    "buttonGoToTasks": "Create task"
   }
 }

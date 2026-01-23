@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card } from '@/shared/ui';
+import { Card, Header } from '@/shared/ui';
+import { IconUser } from '@/shared/assets/images/iconUser/iconUser';
 import trophy1 from './assets/Gemini_Generated_Image_87xzbo87xzbo87xz 1.png';
 import trophy2 from './assets/Gemini_Generated_Image_87xzbo87xzbo87xz 1 (1).png';
 import trophy3 from './assets/Gemini_Generated_Image_87xzbo87xzbo87xz 1 (2).png';
@@ -46,12 +47,14 @@ export const LeaderboardPage: FC = () => {
 
     return (
         <div className="min-h-screen bg-white">
+            <Header
+                title={t('leaderboard.title')}
+                rightActions={[
+                    <IconUser key="settings" />
+                ]}
+            />
             <div className="px-4 py-8">
                 <div className="max-w-md mx-auto">
-                    {/* Заголовок */}
-                    <h1 className="text-2xl font-bold text-primary mb-6 text-center">
-                        {t('leaderboard.title')}
-                    </h1>
 
                     {/* Топ-3 сообщества */}
                     <Card className="mb-4 p-6 rounded-[12px] border border-[#F2F2F2] border-b-4 border-r-4">

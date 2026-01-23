@@ -11,6 +11,7 @@ import { RoleRedirect } from './role-redirect';
 import { TaskPreviewPage } from '@/pages/tasks/ui';
 import {TaskDetailsPage} from "@/pages/tasks/ui/task-details.tsx";
 import {TaskCompletedPage} from "@/pages/tasks/ui/task-completed.tsx";
+import {CategoriesPage} from "@/pages/needy-categories";
 
 export const Router: FC = () => {
   return (
@@ -95,7 +96,7 @@ export const Router: FC = () => {
           path="/needy"
           element={
             <PrivateRoute allowedRoles={['needy']}>
-              <TasksPage />
+              <CategoriesPage />
             </PrivateRoute>
           }
         />

@@ -37,6 +37,9 @@ export function useVerifySms() {
           duration: 4000,
         });
 
+        // Отправляем событие об успешной авторизации для запроса push-уведомлений
+        window.dispatchEvent(new CustomEvent('user-authenticated', { detail: { user: data.user } }));
+
         // Редирект на основе роли пользователя
         // Если новый пользователь (нет firstName) - на онбординг
         // Если существующий - на главную по роли

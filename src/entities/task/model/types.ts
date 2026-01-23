@@ -31,12 +31,21 @@ export interface Task {
   points: number;
   status: TaskStatus;
   categoryId?: string;
+  category?: TaskCategory,
   skillIds?: string[];
   firstResponseMode: boolean;
   assignedVolunteerId?: string;
   approveBy: TaskApproveRole[];
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface TaskCategory {
+    id: string;
+    name: string;
+    iconSvg: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 export interface TaskResponse {

@@ -17,7 +17,6 @@ export const authApi = {
     };
     
     payload.isDev = true;
-
     return apiClient.request<SendSmsResponse>('/auth/user/sms/send', {
       method: 'POST',
       body: JSON.stringify(payload),
