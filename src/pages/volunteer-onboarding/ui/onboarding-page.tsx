@@ -2,8 +2,8 @@ import { FC, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Input } from '@/shared/ui';
-import backgroundImage from './assets/Tal_background_--ar_11_--v_7_dc9a92ad-7e25-4ad7-bfe4-618b3aa51e78_3 1.png';
-import thankYouImage from './assets/Tal_background_--ar_11_--v_7_201dcc33-c3b1-4090-9884-5f0540ec3ef3 1.png';
+import backgroundImage from './assets/wheel.webp';
+import thankYouImage from './assets/thankYou.webp';
 import { ProgressSteps } from './progress-steps';
 
 type OnboardingStep = 'program' | 'skills' | 'city' | 'profile' | 'contact' | 'photo' | 'thank-you';
